@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.UI.MvcApp", "TodoAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.Domain", "TodoApp.Domain\TodoApp.Domain.csproj", "{70537F1E-044D-A559-F446-8CA8D12F3E73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.UI.BlazorWebApp", "TodoApp.UI.BlazorWebApp\TodoApp.UI.BlazorWebApp.csproj", "{39DCE70A-B195-4CBC-96D0-C02BBC71EC82}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6BCC996D-B468-413C-685C-7576F17E513C} = {6BCC996D-B468-413C-685C-7576F17E513C}
+		{C96B6702-2590-4967-BB48-09C2D16D2817} = {C96B6702-2590-4967-BB48-09C2D16D2817}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +39,10 @@ Global
 		{70537F1E-044D-A559-F446-8CA8D12F3E73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70537F1E-044D-A559-F446-8CA8D12F3E73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70537F1E-044D-A559-F446-8CA8D12F3E73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39DCE70A-B195-4CBC-96D0-C02BBC71EC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39DCE70A-B195-4CBC-96D0-C02BBC71EC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39DCE70A-B195-4CBC-96D0-C02BBC71EC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39DCE70A-B195-4CBC-96D0-C02BBC71EC82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
