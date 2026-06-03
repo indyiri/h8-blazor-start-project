@@ -13,11 +13,12 @@ var connectionString = builder.Environment.IsDevelopment()
     ? builder.Configuration.GetConnectionString("LocalConnection")
     : builder.Configuration.GetConnectionString("PxlConnection");
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContextFactory<AppDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 builder.Services.AddScoped<TodoAppService>();
-builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+builder.Services.AddServerSideBlazor();
 
 var app = builder.Build();
 
@@ -31,7 +32,8 @@ else
 {
     using (var scope = app.Services.CreateScope())
     {
-        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<AppDbContext>>();
+        using var db = factory.CreateDbContext();
         db.Database.Migrate();
     }
 }
@@ -47,6 +49,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+app.MapBlazorHub();
 
 app.Run();

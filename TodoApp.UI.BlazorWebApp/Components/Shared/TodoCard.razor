@@ -1,0 +1,24 @@
+﻿@using TodoApp.Domain.Entities
+
+<li class="list-group-item d-flex align-items-center gap-2">
+    <input type="checkbox"
+           checked="@Item.IsDone"
+           @onchange="OnCheckedChanged" />
+
+    <span class="@(Item.IsDone ? "text-decoration-line-through text-muted" : "")">
+        @Item.Title
+    </span>
+</li>
+
+@code {
+    [Parameter]
+    public TodoItem Item { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<TodoItem> OnDoneChanged { get; set; }
+
+    private async Task OnCheckedChanged()
+    {
+        await OnDoneChanged.InvokeAsync(Item);
+    }
+}

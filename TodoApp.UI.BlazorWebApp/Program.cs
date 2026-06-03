@@ -13,7 +13,7 @@ var connectionString = builder.Environment.IsDevelopment()
     ? builder.Configuration.GetConnectionString("LocalConnection")
     : builder.Configuration.GetConnectionString("PxlConnection");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContextFactory<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();

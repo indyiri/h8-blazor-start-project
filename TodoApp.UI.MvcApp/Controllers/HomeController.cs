@@ -10,5 +10,10 @@ namespace TodoApp.UI.MvcApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Todos()
+        {
+            return View();
+        }
     }
 }

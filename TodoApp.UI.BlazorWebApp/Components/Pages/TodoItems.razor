@@ -6,36 +6,44 @@
 
 <h3>TodoItems</h3>
 
-<input @bind="newTitle" placeholder="New todo..." />
-<button @onclick="AddTodo">Add</button>
-<ul>
+<div class="mb-3">
+    <input class="form-control" @bind="newTitle" placeholder="Nieuwe taak..." />
+    <button class="btn btn-primary mt-2" @onclick="AddTodo">Toevoegen</button>
+</div>
+
+<ul class="list-group">
     @foreach (var item in todos)
     {
-        <li>
-            <input type="checkbox" checked="@item.IsDone" @onchange="async _ => await ToggleTodo(item.Id!.Value)" />
-            @item.Title
-        </li>
+        <TodoCard Item="item" OnDoneChanged="MarkAsDone" />
     }
 </ul>
 
 @code {
-    List<TodoItem> todos = new();
-    string newTitle = "";
+    private List<TodoItem> todos = new();
+    private string newTitle = string.Empty;
+
     protected override async Task OnInitializedAsync()
     {
         await Load();
     }
 
-    async Task Load()
+    private async Task Load()
     {
         todos = await TodoService.GetTodosAsync();
     }
 
-    async Task AddTodo()
+    private async Task AddTodo()
     {
         if (string.IsNullOrWhiteSpace(newTitle)) return;
+
         await TodoService.AddTodoAsync(newTitle);
-        newTitle = "";
+        newTitle = string.Empty;
+        await Load();
+    }
+
+    private async Task MarkAsDone(TodoItem item)
+    {
+        await TodoService.ToggleDoneAsync(item.Id!.Value);
         await Load();
     }
 
